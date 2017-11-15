@@ -1,5 +1,7 @@
 package client;
 
+import java.util.Random;
+
 /**
  * Class that will make a grid by specified dimensions
  * @author Melchor Dominguez & Victoria Pruett
@@ -14,6 +16,8 @@ public class Grid {
 	/** The actual grid for the grid class*/
 	private String[][] grid;
 	
+	Random rand;
+	
 	private static int BATTLE_SIZE = 10;
 	/**
 	 * Constructor that will 
@@ -23,6 +27,7 @@ public class Grid {
 		gridSize = size;
 		grid = new String[gridSize][gridSize];
 		defineGrid();
+		rand = new Random();
 	}//end constructor
 	
 	/**
@@ -87,9 +92,76 @@ public class Grid {
 	public void setBattle() {
 		if(gridSize == BATTLE_SIZE) {
 			//function will continue and set up battle
-			
+			boolean good = false;
+			while(good != true) {
+			    good = addShip(5, "S");
+			}//end while
+			good = false;
+			while(good != true) {
+			    good = addShip(4, "R");
+			}
+			good = false;
+			while(good != true) {
+			    good = addShip(3, "T");
+			}
+			good = false;
+			while( good != true) {
+			    good = addShip(3, "L");
+			}
+			good = false;
+			while(good != true) {
+			    good = addShip(2, "W");
+			}
 		}
 		//function ends
+	}
+	
+	/**
+	 * 
+	 * @param size
+	 * @param c
+	 * @return
+	 */
+	public boolean addShip(int size, String c) {
+	    //sets return value as true until error found
+		boolean b = true;
+		String[][] tempGrid = grid;
+		
+		//generate random placement for ship
+		int row = rand.nextInt(9);
+		int col = rand.nextInt(9);
+		
+		//set boolean to go in the vertical direction
+		boolean vert = rand.nextBoolean();
+		
+		//places the next ship 
+		if(vert) {
+		    if((col + size) > 9) {
+		        col -= size;
+		    }//end if
+		    for(int i = 0; i < size; i++) {
+		        if(grid[row][i].equals(" ")) {
+		            grid[row][i] = c;
+		        }else {
+		            b = false;
+		            grid = tempGrid;
+		        }//end if
+		    }//end for
+		    
+		}else {
+		   if((row + size) > 9) {
+		       row -= size;
+		   }//end if
+		   for(int i = 0; i < size; i++) {
+               if(grid[i][col].equals(" ")) {
+                   grid[i][col] = c;
+               }else {
+                   b = false;
+                   grid = tempGrid;
+               }//end if
+           }//end for
+		}//end addShip
+		return b;
 	}
 	
 	/**
@@ -98,6 +170,8 @@ public class Grid {
 	 */
 	public static void main(String args[]) {
 		Grid newGrid = new Grid(10);
+		newGrid.printGrid();
+		newGrid.setBattle();
 		newGrid.printGrid();
 	}
 }
