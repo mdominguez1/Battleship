@@ -124,7 +124,7 @@ public class Game {
 		public Player(String username) {
 			
 					this.username = username;
-				    playerGrid = new Grid(4);
+				    playerGrid = new Grid(10);
 				    
 			}
 
@@ -161,8 +161,17 @@ public class Game {
 	game.turn();
 	game.turn();
 	game.turn();
+	game.turn();
    game.play();
-   play.playerGrid.printGrid();
+ play.playerGrid.setBattle();
+ newPlayer.playerGrid.setBattle();
+play.playerGrid.printGrid();
+play.playerGrid.hit(0, 5);
+play.playerGrid.hit(0, 6);
+play.playerGrid.hit(3, 4);
+play.playerGrid.printGrid();
+   
+   
    
    
 		
