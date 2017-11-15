@@ -77,7 +77,7 @@ public class Grid {
 	 * r row and the c column
 	 */
 	public void hit(int r, int c) {
-			if(grid[r][c].equals("R") || grid[r][c].equals("C") || grid[r][c].equals("D") || grid[r][c].equals("B")) {
+			if(grid[r][c].equals("R") || grid[r][c].equals("S") || grid[r][c].equals("T") || grid[r][c].equals("W")) {
 				grid[r][c] = "@";
 			} else if(grid[r][c].equals(" ")) {
 				grid[r][c] = "X";
