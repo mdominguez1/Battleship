@@ -125,7 +125,6 @@ public class Grid {
 	public boolean addShip(int size, String c) {
 	    //sets return value as true until error found
 		boolean b = true;
-		String[][] tempGrid = grid;
 		
 		//generate random placement for ship
 		int row = rand.nextInt(9);
@@ -144,7 +143,6 @@ public class Grid {
 		            grid[row][i] = c;
 		        }else {
 		            b = false;
-		            grid = tempGrid;
 		        }//end if
 		    }//end for
 		    
@@ -157,10 +155,20 @@ public class Grid {
                    grid[i][col] = c;
                }else {
                    b = false;
-                   grid = tempGrid;
                }//end if
            }//end for
 		}//end addShip
+		
+		if(!b) {
+		    for(int i = 0; i < BATTLE_SIZE-1; i++) {
+		        for(int j = 0; j < BATTLE_SIZE-1; j++) {
+		            if(grid[i][j].equals(c)) {
+		                grid[i][j].equals(" ");
+		            }//end if
+		        }//end for
+		    }//end for
+		}//end if
+		
 		return b;
 	}
 	
