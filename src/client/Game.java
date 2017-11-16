@@ -94,6 +94,20 @@ public class Game {
 
 
 	}
+	
+	public List<Player> getList(){
+		return this.playerList;
+	}
+
+	public Player getPlayer(String username){
+		Player retPlayer = new Player(null);
+		for(int i = 0; i < playerList.size(); i++){
+			if(playerList.get(i).username.equals(username)){
+				retPlayer = playerList.get(i);
+			}
+		}
+		return retPlayer;
+	}
 
 
 
@@ -145,6 +159,12 @@ public class Game {
 		public String getUsername() {
 			return this.username;
 		}
+		
+		public Grid getGrid(){
+			return this.playerGrid;
+		}
+		
+		
 	}
 	public static void main(String args[]) {
 		
@@ -165,10 +185,11 @@ public class Game {
    game.play();
  play.playerGrid.setBattle();
  newPlayer.playerGrid.setBattle();
+ 
 play.playerGrid.printGrid();
-play.playerGrid.hit(0, 5);
-play.playerGrid.hit(0, 6);
-play.playerGrid.hit(3, 4);
+//play.playerGrid.hit(0, 5);
+//play.playerGrid.hit(0, 6);
+//play.playerGrid.hit(3, 4);
 play.playerGrid.printGrid();
    
    
