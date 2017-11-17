@@ -1,7 +1,9 @@
+package server;
+
 import java.util.Scanner;
 
-import client.Game;
-import client.Game.Player;
+import server.Game;
+import server.Game.Player;
 
 public class BattleshipTester {
 	
