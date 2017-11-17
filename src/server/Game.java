@@ -1,4 +1,4 @@
-package server;
+package client;
 
 import java.util.ArrayList;
 
@@ -26,6 +26,9 @@ public class Game {
 	 * Boolean to tell if a game is already in progress.
 	 */
 	boolean inProgress;
+	
+	
+	boolean turnCheck = true;
 
 	/**
 	 * The play method checks to see if there is a already a game in progress
@@ -61,38 +64,55 @@ public class Game {
 	 * @param username The username of the player that wants to join the game.
 	 */
 
-	public void join(Player player) {
-		
-		if(!playerList.contains(player)){
-			playerList.add(player);
-			System.out.println("!!! " + player.getUsername() + " " + " has joined the game");
+	public void join(String player) {
+	    Player newPlayer = new Player(player);
+		for(int i = 0; i < playerList.size(); i++){
+		if(!playerList.get(i).username.equals(player)){
+			playerList.add(newPlayer);
+			System.out.println("!!! " + player + " " + " has joined the game");
 		}else{
 			System.out.println("That user has already joined the game.");
 
 		}
+		}
 	}
-/*public void Print(){
-	for(int i = 0; i < playerList.size(); i++){
-		System.out.println(playerList.get(i).username + " ");
-	}
-	
-	
-}
-*/
+
 	
 	/**
 	 * Decides whose turn it is next.
 	 */
-	public void turn(){
-		
-		//for(int i = 0; i < playerList.size(); i++){
-			System.out.println("It is " + playerList.get(0).username + "'s" + " turn!");
-
-		//}
-
-		Collections.rotate(playerList, 1);
-
-
+	public Player turn(){
+		if(turnCheck == true){
+			//System.out.println("It is " + playerList.get(0).username + "'s" + " turn!");
+			Collections.rotate(playerList, 1);
+			return playerList.get(0);	
+		}else{
+			//System.out.println(playerList.get(playerList.size()-1).username + " please try again.");
+			//System.out.println("It is still " + playerList.get(playerList.size()-1).username + "'s" + " turn.");
+			return playerList.get(playerList.size()-1);	
+		}
+	}
+	
+	/**
+	 * Hits the player at the specified 
+	 * @param player - player to hit
+	 * @param row - row to hit
+	 * @param col - col to hit
+	 */
+	public void attack(String player, int row, int col){
+	    for(Player cur: playerList){
+	        if(cur.getUsername().equals(player)){
+	            cur.getGrid().hit(row, col);
+	            this.turn();
+	        }
+	    }//end for-each
+	}//end hit
+	
+	public boolean getTurnCheck(){
+		return this.turnCheck;
+	}
+	public void setTurnCheck(Boolean it){
+		this.turnCheck  = it;
 	}
 	
 	public List<Player> getList(){
@@ -108,7 +128,21 @@ public class Game {
 		}
 		return retPlayer;
 	}
-
+	
+public boolean inList(String username){
+	boolean check  =  false;
+	for(int i = 0; i < playerList.size(); i++){
+		if(playerList.get(i).getUsername().equals(username)){
+			check = true;
+			
+		}else{
+			check = false;
+		}
+		
+		
+	}
+	return check;
+}
 
 
 	/**
@@ -173,10 +207,10 @@ public class Game {
 	Player thirdPlayer = new Game().new Player("player3");
 	
 	Game game = new Game();
-	game.join(play);
-	game.join(newPlayer);
-	game.join(thirdPlayer);
-	game.join(thirdPlayer);
+	//game.join(play);
+	//game.join(newPlayer);
+	//game.join(thirdPlayer);
+	//game.join(thirdPlayer);
 	//game.Print();
 	game.turn();
 	game.turn();
