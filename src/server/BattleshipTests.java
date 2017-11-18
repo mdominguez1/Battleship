@@ -27,12 +27,16 @@ public class BattleshipTests {
 	        game.join(secondPlayer.getUsername());
 		
 		
-		firstPlayer.getGrid().setBattle();
-		secondPlayer.getGrid().setBattle();
+		for(int i = 0; i < game.playerList.size(); i++){
+		    game.playerList.get(i).getGrid().setBattle();
+		}
+		for(int i = 0; i < game.playerList.size(); i++){
+            game.playerList.get(i).getGrid().printGrid();
+        }
 		
-		firstPlayer.getGrid().printGrid();
-		secondPlayer.getGrid().printGrid();
-		//System.out.println(game.playerList.get(0).getUsername());
+		//firstPlayer.getGrid().printGrid();
+		//secondPlayer.getGrid().printGrid();
+		
 		
 		game.inProgress = true;
 		turnName = game.turn().getUsername();
