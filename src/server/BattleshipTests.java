@@ -8,23 +8,23 @@ public class BattleshipTests {
 	
 	boolean check = false;
 	
-	//static Game game;
+	
 	public static void main(String[] args){
 		 String turnName;
 		 String oppPlayer;
 		 int row;
 		 int column;
-		System.out.println("Please enter a username to join the game.");
-		Scanner scan = new Scanner(System.in);
-		
-		Player firstPlayer = new Game().new Player(scan.nextLine());
-		Game game = new Game();
-		game.join(firstPlayer.getUsername());
-		
-		System.out.println("Please enter a username to join the game.");
-		Player secondPlayer = new Game().new Player(scan.nextLine());
-		game.join(secondPlayer.getUsername());
-		
+		 Game game = new Game();
+		   System.out.println("Please enter a username to join the game.");
+	        Scanner scan = new Scanner(System.in);
+	        
+	        Player firstPlayer = new Game().new Player(scan.nextLine());
+	        game.join(firstPlayer.getUsername());
+	        
+	        System.out.println("Please enter a username to join the game.");
+	     
+	        Player secondPlayer = new Game().new Player(scan.nextLine());
+	        game.join(secondPlayer.getUsername());
 		
 		
 		firstPlayer.getGrid().setBattle();
@@ -32,14 +32,14 @@ public class BattleshipTests {
 		
 		firstPlayer.getGrid().printGrid();
 		secondPlayer.getGrid().printGrid();
-		
+		//System.out.println(game.playerList.get(0).getUsername());
 		
 		game.inProgress = true;
-		
+		turnName = game.turn().getUsername();
 		while(game.inProgress == true){
 		
 		
-		turnName = game.turn().getUsername();
+		;
 		System.out.println("It is " + turnName  + "'s turn!!");
 		
 		
@@ -60,16 +60,17 @@ public class BattleshipTests {
 	   column = scan.nextInt();
 	  
 	   
-	 if(!oppPlayer.equals(turnName)){
+	 if(game.attack(oppPlayer,row,column) == true && !oppPlayer.equals(turnName)){
 		
 		 
-	 game.attack(oppPlayer,row, column);
+	 //game.attack(oppPlayer,row, column);
 	 
 	 System.out.println(turnName + " just attacked " + oppPlayer + "!!!");
 	 
 	 game.getPlayer(oppPlayer).getGrid().printGrid();
 	 
 		 game.setTurnCheck(true);
+		  turnName = game.turn().getUsername();
 		 
 		
 		 
@@ -80,7 +81,7 @@ public class BattleshipTests {
 		 game.setTurnCheck(false);
 		 System.out.println("It is still " + turnName + "'s turn.");
 			
-		 System.out.println("Who would you like to attack?");
+		 /*System.out.println("Who would you like to attack?");
 		 
 		 oppPlayer = scan.next();
 		
@@ -91,7 +92,7 @@ public class BattleshipTests {
 		 
 		 System.out.println("What column would you like to attack?");
 		   column = scan.nextInt();
-		 
+		 */
 		
 		}
 	

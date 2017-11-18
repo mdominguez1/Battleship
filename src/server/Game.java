@@ -44,7 +44,7 @@ public class Game {
 
 
 	public void play() {
-		if(inProgress = false) {
+		if(inProgress == false) {
 			if(playerList.size() >= 2) {
 				System.out.println("The game begins!");
 				inProgress = true;
@@ -53,7 +53,7 @@ public class Game {
 				System.out.println("Not enough players to play the game");
 			}
 		}else {
-			System.out.println("Game already in progess.");
+			System.out.println("Game already in progress.");
 
 
 		}
@@ -66,15 +66,19 @@ public class Game {
 
 	public void join(String player) {
 	    Player newPlayer = new Player(player);
-		for(int i = 0; i < playerList.size(); i++){
+	    playerList.add(newPlayer);
+	    
+		/*for(int i = 0; i < playerList.size()-1; i++){
+		    Player newPlayer = new Player(player);
 		if(!playerList.get(i).username.equals(player)){
+		    
 			playerList.add(newPlayer);
 			System.out.println("!!! " + player + " " + " has joined the game");
 		}else{
 			System.out.println("That user has already joined the game.");
 
 		}
-		}
+		}*/
 	}
 
 	
@@ -88,7 +92,7 @@ public class Game {
 			return playerList.get(0);	
 		}else{
 			//System.out.println(playerList.get(playerList.size()-1).username + " please try again.");
-			//System.out.println("It is still " + playerList.get(playerList.size()-1).username + "'s" + " turn.");
+			System.out.println("It is still " + playerList.get(playerList.size()-1).username + "'s" + " turn.");
 			return playerList.get(playerList.size()-1);	
 		}
 	}
@@ -99,13 +103,18 @@ public class Game {
 	 * @param row - row to hit
 	 * @param col - col to hit
 	 */
-	public void attack(String player, int row, int col){
+	public boolean attack(String player, int row, int col){
+	    boolean answer = false;
 	    for(Player cur: playerList){
 	        if(cur.getUsername().equals(player)){
 	            cur.getGrid().hit(row, col);
-	            this.turn();
-	        }
-	    }//end for-each
+	            
+	          
+	            answer =  true;
+	        
+	            }
+	    }
+	    return answer;//end for-each
 	}//end hit
 	
 	public boolean getTurnCheck(){
