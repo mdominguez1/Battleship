@@ -36,10 +36,8 @@ public class Game {
 	 */
 
 	public Game(){
-		
 		playerList = new ArrayList<Player>();
 		inProgress = false;
-		
 	}
 
 
@@ -48,14 +46,11 @@ public class Game {
 			if(playerList.size() >= 2) {
 				System.out.println("The game begins!");
 				inProgress = true;
-
 			}else {
 				System.out.println("Not enough players to play the game");
 			}
 		}else {
 			System.out.println("Game already in progress.");
-
-
 		}
 	}
 	/**
@@ -65,21 +60,14 @@ public class Game {
 	 */
 
 	public void join(String player) {
-	    Player newPlayer = new Player(player);
-	    playerList.add(newPlayer);
-	    
-		/*for(int i = 0; i < playerList.size()-1; i++){
-		    Player newPlayer = new Player(player);
-		if(!playerList.get(i).username.equals(player)){
-		    
-			playerList.add(newPlayer);
-			System.out.println("!!! " + player + " " + " has joined the game");
-		}else{
-			System.out.println("That user has already joined the game.");
-
-		}
-		}*/
-	}
+	    if(!this.inList(player)) {
+	        Player newPlayer = new Player(player);
+	        playerList.add(newPlayer);
+	        System.out.print("!!! " + player + " has joined");
+	    }else {
+	        System.out.print("There is already a player with that name ");
+	    }
+	}//end join()
 
 	
 	/**
@@ -94,8 +82,8 @@ public class Game {
 			//System.out.println(playerList.get(playerList.size()-1).username + " please try again.");
 			System.out.println("It is still " + playerList.get(playerList.size()-1).username + "'s" + " turn.");
 			return playerList.get(playerList.size()-1);	
-		}
-	}
+		}//end if-else
+	}//end turn()
 	
 	/**
 	 * Hits the player at the specified 
@@ -108,51 +96,79 @@ public class Game {
 	    for(Player cur: playerList){
 	        if(cur.getUsername().equals(player)){
 	            cur.getGrid().hit(row, col);
-	            
-	          
 	            answer =  true;
-	        
-	            }
-	    }
-	    return answer;//end for-each
+	        }//end if
+	    }//end for-each
+	    return answer;
 	}//end hit
 	
+	/**
+	 * return the turn check
+	 * @return - turn check
+	 */
 	public boolean getTurnCheck(){
 		return this.turnCheck;
-	}
-	public void setTurnCheck(Boolean it){
-		this.turnCheck  = it;
-	}
+	}//end getTurnCheck()
 	
+	/**
+	 * Change the turnCheck boolean
+	 * @param it - new boolean 
+	 */
+	public void setTurnCheck(boolean it){
+		this.turnCheck  = it;
+	}//end setTurnCheck()
+	
+	/**
+	 * Return the list of the players
+	 * @return - playerList
+	 */
 	public List<Player> getList(){
 		return this.playerList;
-	}
+	}//end getList()
 
+	/**
+	 * Return player whose name matches
+	 *@return - a player whose name matches username
+	 */
 	public Player getPlayer(String username){
-		Player retPlayer = new Player(null);
+		Player retPlayer = null;
 		for(int i = 0; i < playerList.size(); i++){
 			if(playerList.get(i).username.equals(username)){
 				retPlayer = playerList.get(i);
-			}
-		}
+			}//end if
+		}//end for
 		return retPlayer;
-	}
+	}//end getPlayer()
 	
-public boolean inList(String username){
-	boolean check  =  false;
-	for(int i = 0; i < playerList.size(); i++){
-		if(playerList.get(i).getUsername().equals(username)){
-			check = true;
-			
-		}else{
-			check = false;
-		}
-		
-		
-	}
-	return check;
-}
+	/**
+	 * returns a boolean if there is a player whose name matches the list
+	 * @param username - username to search for
+	 * @return - true, if there is a username who matches the input 
+	 */
+	public boolean inList(String username){
+	    boolean check  =  false;
+	    for(int i = 0; i < playerList.size(); i++){
+	        if(playerList.get(i).getUsername().equals(username)){
+	            check = true;
+	        }else{
+	            check = false;
+	        }//end if
+	    }//end for
+	    return check;
+	}//end inList()
 
+	/**
+	 * show the grid of a player
+	 * @param username - username to search for
+	 */
+	public void show(String username) {
+	    if(inList(username)) {
+	        Player toShow = this.getPlayer(username);
+	        toShow.playerGrid.printGrid();
+	    }else {
+	        System.out.print("There is no player with that username");
+	    }//end if
+	}//end show()
 
 	/**
 	 * Holds all the information to create a new player. Also contains 
@@ -179,13 +195,10 @@ public boolean inList(String username){
 		 * @param username Username of the player.
 		 */
 		public Player(String username) {
-			
-					this.username = username;
-				    playerGrid = new Grid(10);
-				    
-			}
-
-		
+			this.username = username;
+			playerGrid = new Grid(10);
+			playerGrid.setBattle();
+		}
 
 		/**
 		 * Setter method to set or change the players username.
@@ -206,41 +219,34 @@ public boolean inList(String username){
 		public Grid getGrid(){
 			return this.playerGrid;
 		}
-		
-		
 	}
+	
 	public static void main(String args[]) {
 		
-	Player play = new Game().new Player("player1");
-	Player newPlayer = new Game().new Player("player2");
-	Player thirdPlayer = new Game().new Player("player3");
+	    Player play = new Game().new Player("player1");
+	    Player newPlayer = new Game().new Player("player2");
+	    Player thirdPlayer = new Game().new Player("player3");
 	
-	Game game = new Game();
-	//game.join(play);
-	//game.join(newPlayer);
-	//game.join(thirdPlayer);
-	//game.join(thirdPlayer);
-	//game.Print();
-	game.turn();
-	game.turn();
-	game.turn();
-	game.turn();
-   game.play();
- play.playerGrid.setBattle();
- newPlayer.playerGrid.setBattle();
+	    Game game = new Game();
+	    //game.join(play);
+	    //game.join(newPlayer);
+	    //game.join(thirdPlayer);
+	    //game.join(thirdPlayer);
+	    //game.Print();
+	    game.turn();
+	    game.turn();
+	    game.turn();
+	    game.turn();
+	    game.play();
+	    play.playerGrid.setBattle();
+	    newPlayer.playerGrid.setBattle();
  
-play.playerGrid.printGrid();
-//play.playerGrid.hit(0, 5);
-//play.playerGrid.hit(0, 6);
-//play.playerGrid.hit(3, 4);
-play.playerGrid.printGrid();
-   
-   
-   
-   
-		
-	
-	}
+	    play.playerGrid.printGrid();
+	    //play.playerGrid.hit(0, 5);
+	    //play.playerGrid.hit(0, 6);
+	    //play.playerGrid.hit(3, 4);
+	    play.playerGrid.printGrid();
+	}//end main
 
 }
 

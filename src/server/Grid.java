@@ -135,7 +135,7 @@ public class Grid {
 		boolean vert = rand.nextBoolean();
 		
 		//places the next ship 
-		if(vert) {
+		if(vert) {//places in vertical direction
 		    if((col + size) > 9) {
 		        col -= size;
 		    }//end if
@@ -146,8 +146,7 @@ public class Grid {
 		            b = false;
 		        }//end if
 		    }//end for
-		    
-		}else {
+		}else { // places in horizontal direction
 		   if((row + size) > 9) {
 		       row -= size;
 		   }//end if
@@ -160,6 +159,7 @@ public class Grid {
            }//end for
 		}//end addShip
 		
+		//removes ship markers if unsuccessful 
 		if(!b) {
 		    for(int i = 0; i < BATTLE_SIZE-1; i++) {
 		        for(int j = 0; j < BATTLE_SIZE-1; j++) {
