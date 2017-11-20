@@ -26,13 +26,19 @@ public class GameTest {
             output[0] = output[0].replace("/", "");
             if(output[0].equals("join")) {
                 game.join(output[1]);
+                line = "enter next command ";
             }else if(output[0].equals("play")) {
                 game.play();
+                line = "begin attacking ";
             }else if(output[0].equals("show")) {
                 game.show(output[1]);
+                line = "showing " + output[1];
             }else if(output[0].equals("hit")) {
                 String[] numbers = output[2].split(",");
                 game.attack(output[1], Integer.parseInt(numbers[0]), Integer.parseInt(numbers[1]));
+                line = "attacked " + output[1];
+            }else {
+                line = "not a valid command";
             }
         }else if(output[0].equals("Q")){
             line = "Q";

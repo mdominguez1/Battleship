@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Collections;
-import java.util.Collection;
 
 
 
@@ -21,13 +20,13 @@ public class Game {
 	/**
 	 * Arraylist that holds all of the players.
 	 */
-	List<Player> playerList;
+	ArrayList<Player> playerList;
 	/**
 	 * Boolean to tell if a game is already in progress.
 	 */
 	boolean inProgress;
 	
-	
+	/** Boolean value to tell whether or not someone has entered a valid command before rotating to the next person.  */
 	boolean turnCheck = true;
 
 	/**
@@ -38,7 +37,7 @@ public class Game {
 	public Game(){
 		playerList = new ArrayList<Player>();
 		inProgress = false;
-	}
+	}//end Game()
 
 
 	public void play() {
@@ -46,6 +45,7 @@ public class Game {
 			if(playerList.size() >= 2) {
 				System.out.println("The game begins!");
 				inProgress = true;
+				this.turn();
 			}else {
 				System.out.println("Not enough players to play the game");
 			}
@@ -63,7 +63,7 @@ public class Game {
 	    if(!this.inList(player)) {
 	        Player newPlayer = new Player(player);
 	        playerList.add(newPlayer);
-	        System.out.print("!!! " + player + " has joined");
+	        System.out.println("!!! " + player + " has joined");
 	    }else {
 	        System.out.print("There is already a player with that name ");
 	    }
@@ -75,7 +75,7 @@ public class Game {
 	 */
 	public Player turn(){
 		if(turnCheck == true){
-			//System.out.println("It is " + playerList.get(0).username + "'s" + " turn!");
+			System.out.println("It is " + playerList.get(0).username + "'s" + " turn!");
 			Collections.rotate(playerList, 1);
 			return playerList.get(0);	
 		}else{
@@ -96,6 +96,7 @@ public class Game {
 	    for(Player cur: playerList){
 	        if(cur.getUsername().equals(player)){
 	            cur.getGrid().hit(row, col);
+	            this.turn();
 	            answer =  true;
 	        }//end if
 	    }//end for-each
@@ -147,13 +148,10 @@ public class Game {
 	 */
 	public boolean inList(String username){
 	    boolean check  =  false;
-	    for(int i = 0; i < playerList.size(); i++){
-	        if(playerList.get(i).getUsername().equals(username)){
+	    for(Player curr: playerList) {
+	        if(curr.getUsername().equals(username))
 	            check = true;
-	        }else{
-	            check = false;
-	        }//end if
-	    }//end for
+	    }
 	    return check;
 	}//end inList()
 
@@ -164,7 +162,10 @@ public class Game {
 	public void show(String username) {
 	    if(inList(username)) {
 	        Player toShow = this.getPlayer(username);
-	        toShow.playerGrid.printGrid();
+	        if(!playerList.get(0).getUsername().equals(username))
+	            toShow.playerGrid.printGrid();
+	        else
+	            toShow.playerGrid.printOppGrid();
 	    }else {
 	        System.out.print("There is no player with that username");
 	    }//end if
@@ -222,30 +223,6 @@ public class Game {
 	}
 	
 	public static void main(String args[]) {
-		
-	    Player play = new Game().new Player("player1");
-	    Player newPlayer = new Game().new Player("player2");
-	    Player thirdPlayer = new Game().new Player("player3");
-	
-	    Game game = new Game();
-	    //game.join(play);
-	    //game.join(newPlayer);
-	    //game.join(thirdPlayer);
-	    //game.join(thirdPlayer);
-	    //game.Print();
-	    game.turn();
-	    game.turn();
-	    game.turn();
-	    game.turn();
-	    game.play();
-	    play.playerGrid.setBattle();
-	    newPlayer.playerGrid.setBattle();
- 
-	    play.playerGrid.printGrid();
-	    //play.playerGrid.hit(0, 5);
-	    //play.playerGrid.hit(0, 6);
-	    //play.playerGrid.hit(3, 4);
-	    play.playerGrid.printGrid();
 	}//end main
 
 }

@@ -73,6 +73,41 @@ public class Grid {
 	}//end printGrid()
 	
 	/**
+	 * Prints a grid for the opposing players
+	 */
+	public void printOppGrid() {
+	    String numLine = " ";
+	    
+	  //print number line
+        for(int i = 0; i < gridSize; i++) {
+            numLine += "  " + Integer.toString(i) + " ";
+        }
+        System.out.println(numLine);
+        
+        String gridLines = " +";
+        //print lines above grid
+        for(int i = 0; i < gridSize; i++) {
+            gridLines += "---+";
+        }//end for
+        System.out.println(gridLines);
+        
+        //prints the current grid, except for the ship markers
+        
+      //prints the current grid
+        for(int i = 0; i < gridSize; i++) {
+            System.out.print(Integer.toString(i) + "|");
+            for(int j = 0; j < gridSize; j++) {
+                if(grid[i][j].equals(" ") || grid[i][j].equals("@") || grid[i][j].equals("X"))
+                    System.out.print(" " + grid[i][j] + " |");
+                else 
+                    System.out.print(" " + " " + " |");
+            }//end for
+            System.out.println("");
+            System.out.println(gridLines);
+        }//end for
+	}
+	
+	/**
 	 * public class to hit the 
 	 * r row and the c column
 	 */
@@ -164,7 +199,7 @@ public class Grid {
 		    for(int i = 0; i < BATTLE_SIZE-1; i++) {
 		        for(int j = 0; j < BATTLE_SIZE-1; j++) {
 		            if(grid[i][j].equals(c)) {
-		                grid[i][j].equals(" ");
+		                grid[i][j] = " ";
 		            }//end if
 		        }//end for
 		    }//end for
