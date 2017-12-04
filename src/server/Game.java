@@ -75,7 +75,7 @@ public class Game {
 	 */
 	public Player turn(){
 		if(turnCheck == true){
-			System.out.println("It is " + playerList.get(0).username + "'s" + " turn!");
+			//System.out.println("It is " + playerList.get(0).username + "'s" + " turn!");
 			Collections.rotate(playerList, 1);
 			return playerList.get(0);	
 		}else{

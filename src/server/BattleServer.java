@@ -19,9 +19,12 @@ public class BattleServer implements MessageListener{
     /** Listen for clients */
     ServerSocket serverSocket;
     
-    /**  */
-    int current;
+    /**  the current client that is being worked with*/
+    int current = 0;
     
+    /** List of Connection Agents */
+    private ArrayList<ConnectionAgent> agents = new ArrayList<ConnectionAgent>();
+
     /** Game for the clients */
     Game game;
     
@@ -43,7 +46,27 @@ public class BattleServer implements MessageListener{
      */
     public void listen() throws IOException {
         
-        for(; ;) {
+        while(true){ //will continuously listen for sockets until
+            try{
+                Socket connectionSocket = serverSocket.accept();
+
+                // Creates a new Connection agent for the client
+                ConnectionAgent newAgent = new ConnectionAgent(connectionSocket);
+
+                // adds the agent to the list of agents 
+                agents.add(newAgent);
+
+                //updates the current number or clients
+                current = agents.size();
+                
+
+            }catch (IOException e){
+                System.out.println(e);
+                break;
+            }
+
+
+            /*
             //Accept a connection, and create a new 'direct' socket
             // This socket has the same port as the welcome socket. 
             Socket connectionSocket = serverSocket.accept();
@@ -59,6 +82,8 @@ public class BattleServer implements MessageListener{
             // don't forget the newline, the client expects one!
             String modLine = clientLine.toUpperCase();
             clientOut.writeBytes(modLine + "\n");
+
+            */
         }
     }
     

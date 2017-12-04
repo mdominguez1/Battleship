@@ -24,7 +24,7 @@ public class ConnectionAgent extends MessageSource implements Runnable{
     
     
     public ConnectionAgent(Socket socket) {
-        
+       
     }
     
     /**
