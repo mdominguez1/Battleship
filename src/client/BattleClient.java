@@ -17,9 +17,10 @@ import common.MessageListener;
 import common.MessageSource;
 
 public class BattleClient extends MessageSource implements MessageListener{
-    InetAddress host;
-    int port;
-    String username;
+    private InetAddress host;
+    private int port;
+    private String username;
+    
     ConnectionAgent ca;    
     Scanner scanning;
     PrintStreamMessageListener pl = new PrintStreamMessageListener();
@@ -39,7 +40,7 @@ public class BattleClient extends MessageSource implements MessageListener{
         ca.addMessageListener(this);
         this.addMessageListener(pl);
        
-        //ca.thread.start();
+        
         inputLine = new BufferedReader(new InputStreamReader(System.in));
         scanning = new Scanner(System.in);
 
@@ -76,9 +77,7 @@ public class BattleClient extends MessageSource implements MessageListener{
     @Override
     public void messageReceived(String message, MessageSource source) {
         System.out.println(message);
-      if(message.contains("/quit")){
-          sourceClosed(source);
-          sourceC = true;
+     
       }
 
     }
@@ -88,7 +87,7 @@ public class BattleClient extends MessageSource implements MessageListener{
     
     
     
-}
+
 
 
 
