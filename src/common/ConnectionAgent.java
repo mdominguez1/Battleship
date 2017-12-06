@@ -1,4 +1,4 @@
-package server;
+package common;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
-
-import common.MessageSource;
 
 /**
  * Class Responsible for receiving from and sending messages to
