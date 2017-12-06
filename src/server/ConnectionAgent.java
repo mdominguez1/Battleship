@@ -67,6 +67,7 @@ public class ConnectionAgent extends MessageSource implements Runnable{
         while(connected) {
             String line = in.nextLine();
             sendMessage(line);
+            this.notifyReceipt(line);
         }
     }
     

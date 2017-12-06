@@ -38,7 +38,8 @@ public class BattleServer implements MessageListener{
         
         // socket listens for incoming connections
         serverSocket = new ServerSocket(port);
-    }
+        game = new Game();
+    }//end constructor
     
     /**
      * Create a Server with a listening socket
@@ -50,6 +51,7 @@ public class BattleServer implements MessageListener{
         
         //Socket that listens for incoming connections
         serverSocket = new ServerSocket(DEFAULT_PORT);
+        game = new Game();
     }//end BattleServer()
     
     /**
@@ -101,6 +103,7 @@ public class BattleServer implements MessageListener{
      */
     public void messageReceived(String message, MessageSource source) {
         System.out.println("Message Received: " + message);
+        String line = parse(message);
     }
     
     /**
@@ -112,5 +115,32 @@ public class BattleServer implements MessageListener{
     public void sourceClosed(MessageSource source) {
         source.removeMessageListener(this);
         agents.remove(source);
+    }
+    
+    private String parse(String parseLine) {
+        String[] output = parseLine.split("\\s+");
+        String line;
+        
+        if(output[0].startsWith("/")){
+            output[0] = output[0].replace("/", "");
+            if(output[0].equals("join")) {
+                line = game.join(output[1]);
+            }else if(output[0].equals("play")) {
+                line = game.play();
+            }else if(output[0].equals("show")) {
+                line = game.show(output[1]);
+            }else if(output[0].equals("hit")) {
+                String[] numbers = output[2].split(",");
+                game.attack(output[1], Integer.parseInt(numbers[0]), Integer.parseInt(numbers[1]));
+                line = "attacked " + output[1];
+            }else {
+                line = "not a valid command";
+            }
+        }else if(output[0].equals("quit")){
+            line = game.quit();
+        }else {
+            line = "not a valid command";
+        }//end if-else
+        return line;
     }
 }

@@ -40,18 +40,23 @@ public class Game {
 	}//end Game()
 
 
-	public void play() {
+	public String play() {
+	    String returnLine;
 		if(inProgress == false) {
 			if(playerList.size() >= 2) {
 				System.out.println("The game begins!");
+				returnLine = "The game begins!";
 				inProgress = true;
 				this.turn();
 			}else {
 				System.out.println("Not enough players to play the game");
+				returnLine = "The game begins!";
 			}
 		}else {
 			System.out.println("Game already in progress.");
+			returnLine = "Game already in progress.";
 		}
+		return returnLine;
 	}
 	/**
 	 * Adds a player to the game if the username has not already been used and if 
@@ -59,14 +64,18 @@ public class Game {
 	 * @param username The username of the player that wants to join the game.
 	 */
 
-	public void join(String player) {
+	public String join(String player) {
+	    String returnLine;
 	    if(!this.inList(player)) {
 	        Player newPlayer = new Player(player);
 	        playerList.add(newPlayer);
 	        System.out.println("!!! " + player + " has joined");
+	        returnLine = "!!! " + player + " has joined";
 	    }else {
 	        System.out.print("There is already a player with that name ");
+	        returnLine = "There is already a player with that name";
 	    }
+	    return returnLine;
 	}//end join()
 
 	
@@ -159,17 +168,28 @@ public class Game {
 	 * show the grid of a player
 	 * @param username - username to search for
 	 */
-	public void show(String username) {
+	public String show(String username) {
+	    String returnLine;
 	    if(inList(username)) {
 	        Player toShow = this.getPlayer(username);
 	        if(!playerList.get(0).getUsername().equals(username))
-	            toShow.playerGrid.printGrid();
+	            returnLine = toShow.playerGrid.printGrid();
 	        else
-	            toShow.playerGrid.printOppGrid();
+	            returnLine = toShow.playerGrid.printOppGrid();
 	    }else {
-	        System.out.print("There is no player with that username");
+	        //System.out.print("There is no player with that username");
+	        returnLine = "There is no player with that username";
 	    }//end if
+	    return returnLine;
 	}//end show()
+	
+	/**
+	 * quits whoevers turn it is
+	 * @return
+	 */
+	public String quit() {
+	    return "!!! " + this.turn().username + " surrendered";
+	}
 
 	/**
 	 * Holds all the information to create a new player. Also contains 
@@ -222,9 +242,6 @@ public class Game {
 		}
 	}
 	
-	public static void main(String args[]) {
-	}//end main
-
 }
 
 

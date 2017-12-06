@@ -45,66 +45,83 @@ public class Grid {
 	/**
 	 * prints the current grid to screen
 	 */
-	public void printGrid() {
+	public String printGrid() {
 		String numLine = " ";
+		String returnLine;
 		
 		//print number line
 		for(int i = 0; i < gridSize; i++) {
 			numLine += "  " + Integer.toString(i) + " ";
 		}
-		System.out.println(numLine);
+		//System.out.println(numLine);
+		returnLine = numLine + "\n";
 		
 		String gridLines = " +";
 		//print lines above grid
 		for(int i = 0; i < gridSize; i++) {
 			gridLines += "---+";
 		}//end for
-		System.out.println(gridLines);
+		//System.out.println(gridLines);
+		returnLine += gridLines + "\n";
 		
 		//prints the current grid
 		for(int i = 0; i < gridSize; i++) {
-			System.out.print(Integer.toString(i) + "|");
+			//System.out.print(Integer.toString(i) + "|");
+			returnLine += Integer.toString(i) + "|";
 			for(int j = 0; j < gridSize; j++) {
 				System.out.print(" " + grid[i][j] + " |");
+				returnLine += " " + grid[i][j] + " |";
 			}//end for
-			System.out.println("");
-			System.out.println(gridLines);
+			//System.out.println("");
+			returnLine += "\n";
+			//System.out.println(gridLines);
+			returnLine += gridLines + "\n";
 		}//end for
+		return returnLine;
 	}//end printGrid()
 	
 	/**
 	 * Prints a grid for the opposing players
 	 */
-	public void printOppGrid() {
+	public String printOppGrid() {
 	    String numLine = " ";
+	    String returnLine;
 	    
 	  //print number line
         for(int i = 0; i < gridSize; i++) {
             numLine += "  " + Integer.toString(i) + " ";
         }
-        System.out.println(numLine);
+        //System.out.println(numLine);
+        returnLine = numLine + "\n";
+        
         
         String gridLines = " +";
         //print lines above grid
         for(int i = 0; i < gridSize; i++) {
             gridLines += "---+";
         }//end for
-        System.out.println(gridLines);
+        //System.out.println(gridLines);
+        returnLine += gridLines +"\n";
         
         //prints the current grid, except for the ship markers
         
       //prints the current grid
         for(int i = 0; i < gridSize; i++) {
-            System.out.print(Integer.toString(i) + "|");
+            //System.out.print(Integer.toString(i) + "|");
+            returnLine += Integer.toString(i) + "|";
             for(int j = 0; j < gridSize; j++) {
                 if(grid[i][j].equals(" ") || grid[i][j].equals("@") || grid[i][j].equals("X"))
-                    System.out.print(" " + grid[i][j] + " |");
+                    //System.out.print(" " + grid[i][j] + " |");
+                    returnLine += " " + grid[i][j] + " |";
                 else 
-                    System.out.print(" " + " " + " |");
+                    //System.out.print(" " + " " + " |");
+                    returnLine += " " + " " + " |";
             }//end for
-            System.out.println("");
-            System.out.println(gridLines);
+            //System.out.println("");
+            //System.out.println(gridLines);
+            returnLine += "\n" + gridLines + "\n";
         }//end for
+        return returnLine;
 	}
 	
 	/**
