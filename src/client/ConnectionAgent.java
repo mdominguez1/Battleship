@@ -42,12 +42,12 @@ public class ConnectionAgent extends MessageSource implements Runnable{
 
     public void sendMessage(String message){
         while(!socket.isClosed()){
-            if(Check(message)){
+
                 out.println(message);
                 out.flush();
             }
         }
-    }
+
 
 
 
@@ -66,6 +66,7 @@ public class ConnectionAgent extends MessageSource implements Runnable{
 
 
             socket.close();
+            in.close();
 
 
         }catch(IOException e){
@@ -74,50 +75,22 @@ public class ConnectionAgent extends MessageSource implements Runnable{
     }
 
 
-    public boolean Check(String message1){
-        boolean check = true;
 
-        String [] arrayMessage = message1.split(" ");
-        if(!arrayMessage[1].equals("/join") || !arrayMessage[1].equals("/play") || !arrayMessage[1].equals("/attack") || 
-                !arrayMessage[1].equals("/quit") || !arrayMessage[1].equals("/show")){
-          
-            check = false;
-        }
-
-        return check;
-    }
-
-    public boolean quitCheck(String message){
-        boolean quitBoolean = false;
-        if(message.contains("/quit")){
-            close();
-            quitBoolean = true;
-        }
-        return quitBoolean;
-    }
 
 
     public void run(){
 
         while(socket.isConnected()){
             if(in.hasNext()){
-                if(Check(in.nextLine())){
-
-                    if(quitCheck(in.nextLine())){
-                        close();
-                    }else{
+            
                         notifyReceipt(in.nextLine());   
                     }
-                } else{
-                    System.out.println("This is an invalid command");
-                }
-
             }
             in.close();
-            //scannerClose  = true;
+            
         }
     }
-}
+
 
 
 

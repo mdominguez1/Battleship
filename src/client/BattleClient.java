@@ -61,6 +61,29 @@ public class BattleClient extends MessageSource implements MessageListener{
         }
       
     }
+    
+    
+    public boolean Check(String message1){
+        boolean check = true;
+
+        String [] arrayMessage = message1.split(" ");
+        if(!arrayMessage[1].equals("/join") || !arrayMessage[1].equals("/play") || !arrayMessage[1].equals("/attack") || 
+                !arrayMessage[1].equals("/quit") || !arrayMessage[1].equals("/show")){
+          
+            check = false;
+        }
+
+        return check;
+    }
+
+    public boolean quitCheck(String message){
+        boolean quitBoolean = false;
+        if(message.contains("/quit")){
+       
+            quitBoolean = true;
+        }
+        return quitBoolean;
+    }
 
 
 
@@ -76,14 +99,18 @@ public class BattleClient extends MessageSource implements MessageListener{
 
     @Override
     public void messageReceived(String message, MessageSource source) {
-        System.out.println(message);
-     
-      }
-
+        if(Check(message)){
+            if(quitCheck(message) == false){       
+                System.out.println(message);
+            }else{
+                sourceClosed(source);
+            }
+        }
     }
- 
+}
 
-    
+
+
     
     
     
