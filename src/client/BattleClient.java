@@ -38,7 +38,7 @@ public class BattleClient extends MessageSource implements MessageListener{
         
         ca.addMessageListener(this);
         this.addMessageListener(pl);
-        
+       
         //ca.thread.start();
         inputLine = new BufferedReader(new InputStreamReader(System.in));
         scanning = new Scanner(System.in);

@@ -13,42 +13,47 @@ import common.MessageSource;
 
 public class ConnectionAgent extends MessageSource implements Runnable{
     
-Socket socket;
-Scanner in;
-PrintStream out;
-Thread thread;
-String message;
-private static DataInputStream is = null;
-BufferedReader inputLine;
-boolean scannerClose =  false;
-
-public ConnectionAgent(Socket socket){
-    try{
-    this.socket = socket;
-    thread = new Thread();
-    //thread.start();
-    in = new Scanner(System.in);
-   
+    Socket socket;
+    Scanner in;
+    PrintStream out;
+    Thread thread;
+    String message;
+    private static DataInputStream is = null;
+    BufferedReader inputLine;
+    boolean scannerClose =  false;
     
-   inputLine = new BufferedReader(new InputStreamReader(System.in));
-    out = new PrintStream(socket.getOutputStream());
-    }catch(IOException e){
-        System.err.println(e.getMessage());
+    public ConnectionAgent(Socket socket){
+        try{
+            this.socket = socket;
+            in = new Scanner(System.in);
+    
+            inputLine = new BufferedReader(new InputStreamReader(System.in));
+            out = new PrintStream(socket.getOutputStream());
+        }catch(IOException e){
+            System.err.println(e.getMessage());
+        }
+        
+        thread = new Thread(this);
+        thread.start();
+    
     }
     
-    
-}
-
+    public ConnectionAgent(){
+        //RIP
+    }
 
 public void sendMessage(String message){
-  
+   while(!socket.isClosed()){
     if(Check(message)){
         out.println(message);
         out.flush();
         
     
+        }
     }
 }
+    
+
     
  
 public boolean isConnected(){

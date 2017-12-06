@@ -15,12 +15,7 @@ public class BattleDriver {
        BC.connect();
        BC.send(args[2]);
        
-           } else if(args.length == 1){
-               
-               
-               
-               
-               
+              
        }else if(args.length > 2){
                System.out.println("Usage: <Hostname> <Port Number> <User Nickname>");
            }
