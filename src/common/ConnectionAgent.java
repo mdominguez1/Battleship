@@ -51,7 +51,12 @@ public class ConnectionAgent extends MessageSource implements Runnable{
      */
     public void sendMessage(String message) {
         while(connected) {
-            out.println(message);
+            try {
+                output.writeBytes(message);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }//end while
     }//end sendMessage
     
@@ -64,7 +69,6 @@ public class ConnectionAgent extends MessageSource implements Runnable{
     public void run() {
         while(connected) {
             String line = in.nextLine();
-            sendMessage(line);
             this.notifyReceipt(line);
         }
     }
