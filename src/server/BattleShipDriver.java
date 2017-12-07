@@ -1,6 +1,3 @@
-/**
- * 
- */
 package server;
 
 import java.io.IOException;
@@ -23,12 +20,12 @@ public class BattleShipDriver {
      * @throws IOException 
      */
     public static void main(String[] args) throws IOException {
-        BattleServer server;
+        BattleServer server = new BattleServer(DEFAULT_PORT);
         
         if(args.length == 0){
             server = new BattleServer(DEFAULT_PORT);
         }else if(args.length == 1){
-            server = new BattleServer(Integer.parseInt(args[0]);
+            server = new BattleServer(Integer.parseInt(args[0]));
         }else{
             System.out.println(" Error, must use correct format. Use layout > " +
             "BattleShipDriver [<port>] " );

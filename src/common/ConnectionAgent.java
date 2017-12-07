@@ -29,7 +29,10 @@ public class ConnectionAgent extends MessageSource implements Runnable{
     
     private boolean connected;
     
-    
+    /**
+     * Constructor to initialize Connection agent and start a thread
+     * @param socket - 
+     */
     public ConnectionAgent(Socket socket) {
        this.socket = socket;
        try {
@@ -46,8 +49,8 @@ public class ConnectionAgent extends MessageSource implements Runnable{
     }//end constructor
 
     /**
-     * 
-     * @param message
+     * method to send message to output stream
+     * @param message - message to be sent
      */
     public void sendMessage(String message) {
         while(connected) {
@@ -68,7 +71,7 @@ public class ConnectionAgent extends MessageSource implements Runnable{
     @Override
     public void run() {
         while(connected) {
-            String line;
+            String line = "";
             if(in.hasNext())
                 line = in.nextLine();
             System.out.println(line);
