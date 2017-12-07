@@ -73,6 +73,7 @@ public class BattleServer implements MessageListener{
                 newAgent.addMessageListener(this);
                 // adds the agent to the list of agents 
                 agents.add(newAgent);
+                
 
                 //updates the current number or clients
                 current = agents.size();

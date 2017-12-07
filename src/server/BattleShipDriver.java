@@ -12,26 +12,32 @@ import java.io.IOException;
  */
 public class BattleShipDriver {
 
+    /** Default port for the connection */
+    private static final int DEFAULT_PORT = 2323;
+
     /**
-     * run BattleServer
+     * run BattleServer with given command line arguments
      * @param args - command line arguments to run the server 
      *               where:
-     *               arg1 = port number where the server will connect
+     *               args[0] - port number where the server will connect
      * @throws IOException 
      */
     public static void main(String[] args) throws IOException {
         BattleServer server;
         
-        if(args.length > 1) {// if there is more than 1 command line protocol
-            System.out.println("Too many command line arguments given");
-            System.out.println("Usage > BattleShipDriver [<port>]");
+        if(args.length == 0){
+            server = new BattleServer(DEFAULT_PORT);
+        }else if(args.length == 1){
+            server = new BattleServer(Integer.parseInt(args[0]);
+        }else{
+            System.out.println(" Error, must use correct format. Use layout > " +
+            "BattleShipDriver [<port>] " );
             System.exit(0);
-        }else if(args.length == 1) {
-            server = new BattleServer(Integer.parseInt(args[0]));
-        }else {
-            server = new BattleServer();
-        }
+        }//end if-else
+        
+        // listen for connection 
+        server.listen();
 
-    }
+    }//end main
 
-}
+}//end BattleShipDriver

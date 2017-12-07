@@ -10,10 +10,10 @@ public class BattleDriver {
       String defaultHost = "localhost";
        int defaultPort  = 2323;
        try{
-           if(args.length == 2){
+           if(args.length == 3){
        BattleClient BC = new BattleClient(args[0],Integer.parseInt(args[1]),args[2]);
        BC.connect();
-       BC.send(args[2]);
+       BC.send("/join " + args[2]);
        
               
        }else if(args.length > 2){

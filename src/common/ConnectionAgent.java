@@ -68,10 +68,13 @@ public class ConnectionAgent extends MessageSource implements Runnable{
     @Override
     public void run() {
         while(connected) {
-            String line = in.nextLine();
+            String line;
+            if(in.hasNext())
+                line = in.nextLine();
+            System.out.println(line);
             this.notifyReceipt(line);
-        }
-    }
+        }//end while
+    }//end run()
     
     /**
      * Closes all streams connected to client

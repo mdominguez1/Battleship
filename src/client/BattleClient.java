@@ -37,7 +37,6 @@ public class BattleClient extends MessageSource implements MessageListener{
         this.port = port;
         this.username = username;
         
-        ca.addMessageListener(this);
         this.addMessageListener(pl);
        
         
@@ -51,6 +50,8 @@ public class BattleClient extends MessageSource implements MessageListener{
             
       Socket clientSocket  = new Socket(this.host,this.port);
       ca  = new ConnectionAgent(clientSocket);
+      ca.addMessageListener(this);
+
       ca.run();
       
       os = new PrintStream(clientSocket.getOutputStream());
