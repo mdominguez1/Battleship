@@ -131,7 +131,7 @@ public class Grid {
 	 */
 	public void hit(int r, int c) {
 		
-			if(grid[r][c].equals("R") || grid[r][c].equals("T") || grid[r][c].equals("S") || grid[r][c].equals("W") || grid[r][c].equals("L") {
+			if(grid[r][c].equals("R") || grid[r][c].equals("T") || grid[r][c].equals("S") || grid[r][c].equals("W") || grid[r][c].equals("L")) {
 				grid[r][c] = "@";
 			} else if(grid[r][c].equals(" ")) {
 				grid[r][c] = "X";
@@ -179,20 +179,22 @@ public class Grid {
      *         false, if not 
      */
     public boolean checkGrid(){
-       boolean check = true; //default to 
+       boolean check = true; //default to  losing
         for(int i  = 0; i < gridSize; i++){
             for(int j = 0; j < gridSize; j++){
                 if(grid[i][j].equals("R") && 
                     grid[i][j].equals("T") && 
                     grid[i][j].equals("S") && 
                     grid[i][j].equals("W") && 
-                    grid[i][j].equals("L")){
-                    lost = false;
+                    grid[i][j].equals("L")){ //if there is a ship
+                    lost = false;// Lost :(
 
                     check = false;
                 }
             }
         }
+
+        System.out.println("checkGrid : " + check);
         return check;
     }
 

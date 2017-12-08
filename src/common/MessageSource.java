@@ -45,7 +45,7 @@ public abstract class MessageSource {
     public void removeMessageListener(MessageListener listener) {
         messageListeners.remove(listener);
     }//end removeMessageListener
-    
+
     /**
      * Notifies <b>all</b> registered observers that this message source will generate no new
      * messages.

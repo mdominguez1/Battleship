@@ -113,6 +113,10 @@ public class BattleServer implements MessageListener{
             agent.sendMessage(line);
         }//end for 
 
+        if(source instanceof ConnectionAgent){
+            ((ConnectionAgent)source).sendMessage(line);
+        }//end if
+
         //String line = parse(message);
     }//end messageReceived()
     
@@ -138,13 +142,13 @@ public class BattleServer implements MessageListener{
         
         if(output[0].startsWith("/")){
             output[0] = output[0].replace("/", "");
-            if(output[0].equals("join")) {
+            if(output[0].equals("join") && output.length() == 2 ) {
                 line = game.join(output[1]);
-            }else if(output[0].equals("play")) {
+            }else if(output[0].equals("play") && output.length() == 1) {
                 line = game.play();
-            }else if(output[0].equals("show")) {
+            }else if(output[0].equals("show") && output.length() == 2) {
                 line = game.show(output[1]);
-            }else if(output[0].equals("attack")) {
+            }else if(output[0].equals("attack") && output.length() == 3) {
                 String[] numbers = output[2].split(",");
                 game.attack(output[1], Integer.parseInt(numbers[0]), Integer.parseInt(numbers[1]));
                 line = "attacked " + output[1];
