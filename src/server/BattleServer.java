@@ -77,7 +77,6 @@ public class BattleServer implements MessageListener{
 
                 //updates the current number or clients
                 current = agents.size();
-                
 
             }catch (IOException e){
                 System.out.println(e);
@@ -85,6 +84,7 @@ public class BattleServer implements MessageListener{
             }//end try-catch 
         }//end while
     }//end listen()
+
     
     /**
      * Sends a message to every client connected to the server
@@ -105,9 +105,16 @@ public class BattleServer implements MessageListener{
      * @param source The source from which this message originated (if needed).
      */
     public void messageReceived(String message, MessageSource source) {
-        System.out.println("Message Received: " + message);
-        String line = parse(message);
-    }
+       //System.out.println("message received");
+       String line = parse(message);
+        for(ConnectionAgent agent: agents){
+            //System.out.println(agents.size());
+            agent.sendMessage("Message Received: " + message);
+            agent.sendMessage(line);
+        }//end for 
+
+        //String line = parse(message);
+    }//end messageReceived()
     
     /**
      * Used to notify observers that the subject will not receive new messages; observers can
@@ -118,8 +125,13 @@ public class BattleServer implements MessageListener{
     public void sourceClosed(MessageSource source) {
         source.removeMessageListener(this);
         agents.remove(source);
-    }
+    }//end sourceClosed()
     
+    /**
+     * Parse through the line received and return the output
+     * @param parseLine - line to read and send to game
+     * @return - String for the output
+     */
     private String parse(String parseLine) {
         String[] output = parseLine.split("\\s+");
         String line;

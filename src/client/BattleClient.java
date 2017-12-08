@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-import client.ConnectionAgent;
+import common.ConnectionAgent;
 
 import common.MessageListener;
 import common.MessageSource;
@@ -52,7 +52,6 @@ public class BattleClient extends MessageSource implements MessageListener{
       ca  = new ConnectionAgent(clientSocket);
       ca.addMessageListener(this);
 
-      ca.run();
       
       os = new PrintStream(clientSocket.getOutputStream());
       is = new DataInputStream(clientSocket.getInputStream());
@@ -100,6 +99,7 @@ public class BattleClient extends MessageSource implements MessageListener{
 
     @Override
     public void messageReceived(String message, MessageSource source) {
+        //System.out.println("message received");
         if(Check(message)){
             if(quitCheck(message) == false){       
                 System.out.println(message);
