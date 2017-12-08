@@ -131,7 +131,7 @@ public class Grid {
 	 */
 	public void hit(int r, int c) {
 		
-			if(grid[r][c].equals("R") || grid[r][c].equals("T") || grid[r][c].equals("S") || grid[r][c].equals("W")) {
+			if(grid[r][c].equals("R") || grid[r][c].equals("T") || grid[r][c].equals("S") || grid[r][c].equals("W") || grid[r][c].equals("L") {
 				grid[r][c] = "@";
 			} else if(grid[r][c].equals(" ")) {
 				grid[r][c] = "X";
@@ -173,18 +173,23 @@ public class Grid {
     }
 
 
-
+    /**
+     * Checks to see if the Grid has lost 
+     * @return true, if lost
+     *         false, if not 
+     */
     public boolean checkGrid(){
-       boolean check = false;
+       boolean check = true; //default to 
         for(int i  = 0; i < gridSize; i++){
             for(int j = 0; j < gridSize; j++){
-                if(!grid[i][j].equals("R") || 
-                    !grid[i][j].equals("T") || 
-                    !grid[i][j].equals("S") || 
-                    !grid[i][j].equals("W")){
-                    lost = true;
+                if(grid[i][j].equals("R") && 
+                    grid[i][j].equals("T") && 
+                    grid[i][j].equals("S") && 
+                    grid[i][j].equals("W") && 
+                    grid[i][j].equals("L")){
+                    lost = false;
 
-                    check = true;
+                    check = false;
                 }
             }
         }

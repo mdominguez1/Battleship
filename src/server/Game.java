@@ -171,21 +171,23 @@ public class Game {
     }//end inList()
 
 
-
+    /**
+     * Checks to see if there's a winnera
+     * @param player - player to remove 
+     */
     public void Winner(Player player){
-
-        if(player.playerGrid.lost){
+        
+        //checks to see if the player lost
+        if(player.playerGrid.lost){//if the player lost, remove 
             System.out.println(player.getUsername() + " has lost!");
-            playerList.remove(player);
+            playerList.remove(player); //removes player from the list 
             player.lost = true;
-            if(playerList.size() == 1){
+            if(playerList.size() == 1){ // if the size of the list is 1, there's a winner
                 System.out.println(playerList.get(0).getUsername() + " has won!");
 
-            }
-
-
-        }
-    }
+            }//end if 
+        }//end if
+    }//end Winer()
 
 
     /**
