@@ -144,7 +144,7 @@ public class BattleServer implements MessageListener{
                 line = game.play();
             }else if(output[0].equals("show")) {
                 line = game.show(output[1]);
-            }else if(output[0].equals("hit")) {
+            }else if(output[0].equals("attack")) {
                 String[] numbers = output[2].split(",");
                 game.attack(output[1], Integer.parseInt(numbers[0]), Integer.parseInt(numbers[1]));
                 line = "attacked " + output[1];

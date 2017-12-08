@@ -50,7 +50,7 @@ public class Game {
 				this.turn();
 			}else {
 				System.out.println("Not enough players to play the game");
-				returnLine = "The game begins!";
+				returnLine = "Not enough players to play the game";
 			}
 		}else {
 			System.out.println("Game already in progress.");

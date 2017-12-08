@@ -69,7 +69,7 @@ public class Grid {
 			//System.out.print(Integer.toString(i) + "|");
 			returnLine += Integer.toString(i) + "|";
 			for(int j = 0; j < gridSize; j++) {
-				System.out.print(" " + grid[i][j] + " |");
+				//System.out.println(" " + grid[i][j] + " |");
 				returnLine += " " + grid[i][j] + " |";
 			}//end for
 			//System.out.println("");
@@ -223,16 +223,5 @@ public class Grid {
 		}//end if
 		
 		return b;
-	}
-	
-	/**
-	 * main function to test grid
-	 * @param args
-	 */
-	public static void main(String args[]) {
-		Grid newGrid = new Grid(10);
-		newGrid.printGrid();
-		newGrid.setBattle();
-		newGrid.printGrid();
 	}
 }
