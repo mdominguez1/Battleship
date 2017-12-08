@@ -17,6 +17,7 @@ public class Grid {
 	private String[][] grid;
 	
 	Random rand;
+    boolean lost = false;
 	
 	private static int BATTLE_SIZE = 10;
 	/**
@@ -134,8 +135,9 @@ public class Grid {
 				grid[r][c] = "@";
 			} else if(grid[r][c].equals(" ")) {
 				grid[r][c] = "X";
-			}				
-	}
+			}
+        
+    }
 	
 	/**
 	 * Sets the grid up to be a playable
@@ -167,7 +169,32 @@ public class Grid {
 			}
 		}
 		//function ends
-	}
+	
+    }
+
+
+
+    public boolean checkGrid(){
+       boolean check = false;
+        for(int i  = 0; i < gridSize; i++){
+            for(int j = 0; j < gridSize; j++){
+                if(!grid[i][j].equals("R") || 
+                    !grid[i][j].equals("T") || 
+                    !grid[i][j].equals("S") || 
+                    !grid[i][j].equals("W")){
+                    lost = true;
+
+                    check = true;
+                }
+            }
+        }
+        return check;
+    }
+
+
+
+
+
 	
 	/**
 	 * 
